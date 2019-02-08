@@ -91,7 +91,7 @@ class ExamAPIDetailView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, gener
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = ExamSerializer
     queryset = Exam.objects.all()
-    search_fields = ('title', 'remark', 'owner__username')
+    search_fields = ('title', 'remark')
     ordering_fields = 'timestamp'
     lookup_field = 'id'
 

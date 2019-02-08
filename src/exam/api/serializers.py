@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.reverse import reverse as api_reverse
 from exam.models import Exam, AnswerExam
 
 
@@ -14,7 +15,8 @@ class ExamSerializer(serializers.ModelSerializer):
         fields = ['uri', 'owner', 'title', 'remark', 'file', 'timestamp', 'answer_list']
 
     def get_uri(self, obj):
-        return f'api/exam/{obj.id}'
+        request = self.context.get('request')
+        return api_reverse('exams:exam-detail', kwargs={'id': obj.id}, request=request)
 
     """Nested serializer for related field to_exam (models.py)"""
 

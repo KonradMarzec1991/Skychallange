@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
   url(r'^admin/', admin.site.urls),
-  url(r'^api/', include('exam.api.urls')),
+  url(r'^api/', include(('exam.api.urls', 'exam-api'), namespace='exams')),
 ]
 
 if settings.DEBUG:
