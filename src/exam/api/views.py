@@ -91,6 +91,8 @@ class ExamAPIDetailView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, gener
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = ExamSerializer
     queryset = Exam.objects.all()
+    search_fields = ('title', 'remark', 'owner__username')
+    ordering_fields = 'timestamp'
     lookup_field = 'id'
 
     def put(self, request, *args, **kwargs):
@@ -108,6 +110,8 @@ class AnswerExamAPIDetailView(mixins.UpdateModelMixin, mixins.DestroyModelMixin,
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = AnswerExamSerializer
     queryset = AnswerExam.objects.all()
+    search_fields = ('title', 'remark', 'owner__username')
+    ordering_fields = ('timestamp', 'score')
     lookup_field = 'id'
 
     def put(self, request, *args, **kwargs):
