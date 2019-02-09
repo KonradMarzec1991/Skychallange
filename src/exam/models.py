@@ -1,8 +1,11 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from users.models import MyUser
 
 
 SCORE_CHOICES = zip(range(2, 6), range(2, 6))
+
 
 """
 Path where exams will be uploaded to
@@ -15,7 +18,7 @@ def upload_exams(instance, filename):
 
 class Exam(models.Model):
     title = models.CharField(max_length=120, blank=True, null=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     remark = models.TextField()
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -36,7 +39,7 @@ def upload_answers(instance, filename):
 
 class AnswerExam(models.Model):
     title = models.CharField(max_length=120)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    owner = models.ForeignKey(MyUser, on_delete=models.CASCADE, null=True, blank=True)
     to_exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
     remark = models.TextField()
     score = models.IntegerField(choices=SCORE_CHOICES, blank=True, null=True)
@@ -46,7 +49,4 @@ class AnswerExam(models.Model):
 
     def __str__(self):
         return f'{self.title}_answers of {self.owner.username}'
-
-    def get_title(self):
-        return f'{self.to_exam.title}_answer of {self.owner.username}'
 
