@@ -45,7 +45,7 @@ Methods for showing list of exams and answers
 
 class ExamAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 
-    permission_classes = [IsLecturer]
+    permission_classes = []
     serializer_class = ExamSerializer
 
     def get_queryset(self):
@@ -90,7 +90,7 @@ Methods for showing detail of given record exam/answer to exam
 
 class ExamAPIDetailView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.RetrieveAPIView):
 
-    permission_classes = [IsLecturer]
+    permission_classes = []
     serializer_class = ExamSerializer
     queryset = Exam.objects.all()
     search_fields = ('title', 'remark')
@@ -109,7 +109,7 @@ class ExamAPIDetailView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, gener
 
 class AnswerExamAPIDetailView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.RetrieveAPIView):
 
-    permission_classes = [IsLecturer]
+    permission_classes = []
     serializer_class = AnswerExamSerializer
     queryset = AnswerExam.objects.all()
     search_fields = ('title', 'remark', 'owner__username')

@@ -2,7 +2,6 @@ from rest_framework import serializers
 from rest_framework.reverse import reverse as api_reverse
 from exam.models import Exam, AnswerExam
 
-
 """Serializers for exam/answers"""
 
 
@@ -13,6 +12,10 @@ class ExamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exam
         fields = ['uri', 'owner', 'title', 'remark', 'file', 'timestamp', 'answer_list']
+
+    """
+    Get link to uri view of given instance
+    """
 
     def get_uri(self, obj):
         request = self.context.get('request')
