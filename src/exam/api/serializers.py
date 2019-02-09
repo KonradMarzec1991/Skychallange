@@ -40,7 +40,8 @@ class AnswerExamSerializer(serializers.ModelSerializer):
         fields = ['uri', 'owner', 'title', 'remark', 'file', 'score', 'to_exam', 'timestamp']
 
     def get_uri(self, obj):
-        return f'api/answer/{obj.id}'
+        request = self.context.get('request')
+        return api_reverse('exams:answer-detail', kwargs={'id': obj.id}, request=request)
 
     def to_representation(self, instance):
         representation = super(AnswerExamSerializer, self).to_representation(instance)

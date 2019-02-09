@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status, permissions, mixins, generics
 from .serializers import ExamSerializer, AnswerExamSerializer
 from exam.models import Exam, AnswerExam
+from .permissions import IsLecturer
 
 
 """
@@ -13,10 +14,10 @@ Methods for uploading exams and answers
 
 class ExamUpload(APIView):
     parser_classes = (MultiPartParser, FormParser)
+    permission_classes = [IsLecturer]
 
     def post(self, request, *args, **kwargs):
         file_serializer = ExamSerializer(data=request.data)
-        print(request.data)
         if file_serializer.is_valid():
             file_serializer.save()
             return Response(file_serializer.data, status=status.HTTP_201_CREATED)
@@ -26,6 +27,7 @@ class ExamUpload(APIView):
 
 class ExamAnswersUpload(APIView):
     parser_classes = (MultiPartParser, FormParser)
+    permission_classes = []
 
     def post(self, request, *args, **kwargs):
         file_serializer = AnswerExamSerializer(data=request.data)
@@ -43,7 +45,7 @@ Methods for showing list of exams and answers
 
 class ExamAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 
-    permission_classes = []
+    permission_classes = [IsLecturer]
     serializer_class = ExamSerializer
 
     def get_queryset(self):
@@ -88,7 +90,7 @@ Methods for showing detail of given record exam/answer to exam
 
 class ExamAPIDetailView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.RetrieveAPIView):
 
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsLecturer]
     serializer_class = ExamSerializer
     queryset = Exam.objects.all()
     search_fields = ('title', 'remark')
@@ -107,7 +109,7 @@ class ExamAPIDetailView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, gener
 
 class AnswerExamAPIDetailView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.RetrieveAPIView):
 
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsLecturer]
     serializer_class = AnswerExamSerializer
     queryset = AnswerExam.objects.all()
     search_fields = ('title', 'remark', 'owner__username')
