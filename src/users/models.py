@@ -7,7 +7,7 @@ class MyUser(AbstractBaseUser):
     first_name = models.CharField(max_length=30, blank=True, null=True)
     last_name = models.CharField(max_length=30, blank=True, null=True)
     email = models.EmailField(unique=True)
-    is_lecturer = models.BooleanField(default=False)
+    is_lecturer = models.BooleanField(default=False) # Required attribute to permissions
 
     USERNAME_FIELD = 'username'
 
