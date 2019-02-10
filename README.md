@@ -25,9 +25,9 @@ git clone https://github.com/KonradMarzec1991/Skychallange.git
 pip install -r requirements.txt
 ```
 
-4) Run server
+4) Run server on 'http://127.0.0.1:8000/'
 ```
-python manage.py runserver
+python manage.py runserver 
 ```
 
 You will see all available methods in project.
