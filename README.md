@@ -19,7 +19,7 @@ virtualenv -p python3 .
 source bin/activate
 ```
 
-3) Clone repository to given folder , get in folder with Web Crawler files and install requirements.txt
+3) Clone repository to given folder , get in folder and install requirements.txt
 ```
 git clone https://github.com/KonradMarzec1991/Skychallange.git
 pip install -r requirements.txt
@@ -31,3 +31,12 @@ python manage.py runserver
 ```
 
 You will see all available methods in project.
+
+#### ...or....
+
+1) Create folder on your disk, clone repository and run with docker
+```
+mkdir name_of_folder
+git clone https://github.com/KonradMarzec1991/Skychallange.git
+(sudo) docker-compose up -a
+```
