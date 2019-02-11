@@ -9,6 +9,12 @@ def parse_json(filename):
             temp = ""
 
             for key, value in enumerate(line):
+
+                """
+                This condition could generate error if first in row is any digit, 
+                but not in format of JSON 
+                """
+
                 if value.isdigit() or value == "-":
                     if key < len(line) - 1 and line[key + 1].isdigit():
                         temp += line[key]
