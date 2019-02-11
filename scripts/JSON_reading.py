@@ -9,13 +9,14 @@ def parse_json(filename):
             temp = ""
 
             for key, value in enumerate(line):
-                if value.isdigit():
-                    if key < len(line) - 1 and line[key + 1].isalpha():
+                if value.isdigit() or value == "-":
+                    if key < len(line) - 1 and line[key + 1].isdigit():
                         temp += line[key]
                     else:
                         temp += line[key]
                         result += int(temp)
                         temp = ""
+
     except FileNotFoundError:
         print('File does not exist')
         return None
@@ -28,4 +29,4 @@ def parse_json(filename):
 
 # print(parse_json('jsonreading.txt'))
 
-# 13454
+# 111754
