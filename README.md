@@ -38,5 +38,5 @@ You will see all available methods in project.
 ```
 mkdir name_of_folder
 git clone https://github.com/KonradMarzec1991/Skychallange.git
-(sudo) docker-compose up -a
+(sudo) docker-compose up -d
 ```
